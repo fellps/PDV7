@@ -216,10 +216,17 @@ class QueryAllEventsRecordsCall {
       alwaysAllowBody: false,
     );
   }
+
+  String? name(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].name''',
+      ));
 }
 
 class AddEventsRecordCall {
-  Future<ApiCallResponse> call() async {
+  Future<ApiCallResponse> call({
+    String? name = '',
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'Add events record',
       apiUrl: '${BilheteriaDigitalGroup.baseUrl}/events',

@@ -551,7 +551,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                       ),
                                     );
                                     navigate = () => context.goNamedAuth(
-                                        'TicketList', context.mounted);
+                                        'ProductList', context.mounted);
                                     setState(() {
                                       _model.operatorController?.clear();
                                       _model.passwordController?.clear();

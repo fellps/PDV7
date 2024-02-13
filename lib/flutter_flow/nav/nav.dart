@@ -74,25 +74,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? entryPage ?? const TicketListWidget()
+          ? entryPage ?? const ProductListWidget()
           : const LoginWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? entryPage ?? const TicketListWidget()
+              ? entryPage ?? const ProductListWidget()
               : const LoginWidget(),
         ),
         FFRoute(
           name: 'Login',
           path: '/login',
           builder: (context, params) => const LoginWidget(),
-        ),
-        FFRoute(
-          name: 'TicketList',
-          path: '/ticketList',
-          builder: (context, params) => const TicketListWidget(),
         ),
         FFRoute(
           name: 'Events',
@@ -108,6 +103,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           name: 'UserRegistration',
           path: '/userRegistration',
           builder: (context, params) => const UserRegistrationWidget(),
+        ),
+        FFRoute(
+          name: 'ProductList',
+          path: '/productList',
+          builder: (context, params) => const ProductListWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

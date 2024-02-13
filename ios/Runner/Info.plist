@@ -43,7 +43,10 @@
 	<true/>
 
 
-
+	<key>PermissionGroupNotification</key>
+    <string>Exibir notificações</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>Localização do dispositivo</string>
 
 
 	<key>UILaunchStoryboardName</key>
