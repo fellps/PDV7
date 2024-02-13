@@ -174,11 +174,10 @@ class _LoginWidgetState extends State<LoginWidget>
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    FlutterFlowTheme.of(context).primary,
                     FlutterFlowTheme.of(context).error,
-                    FlutterFlowTheme.of(context).tertiary
+                    FlutterFlowTheme.of(context).error
                   ],
-                  stops: const [0.0, 0.5, 1.0],
+                  stops: const [0.5, 1.0],
                   begin: const AlignmentDirectional(-1.0, -1.0),
                   end: const AlignmentDirectional(1.0, 1.0),
                 ),
@@ -205,7 +204,7 @@ class _LoginWidgetState extends State<LoginWidget>
                       width: MediaQuery.sizeOf(context).width * 0.8,
                       height: 100.0,
                       decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).accent4,
+                        color: const Color(0xC1000000),
                         borderRadius: BorderRadius.circular(16.0),
                       ),
                       child: ClipRRect(
@@ -551,7 +550,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                       ),
                                     );
                                     navigate = () => context.goNamedAuth(
-                                        'ProductList', context.mounted);
+                                        'Events', context.mounted);
                                     setState(() {
                                       _model.operatorController?.clear();
                                       _model.passwordController?.clear();

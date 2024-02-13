@@ -288,6 +288,7 @@ class _ProductListWidgetState extends State<ProductListWidget>
                                             },
                                             child: ListView.builder(
                                               padding: EdgeInsets.zero,
+                                              primary: false,
                                               shrinkWrap: true,
                                               scrollDirection: Axis.vertical,
                                               itemCount:
@@ -371,7 +372,7 @@ class _ProductListWidgetState extends State<ProductListWidget>
                                                                         .max,
                                                                 mainAxisAlignment:
                                                                     MainAxisAlignment
-                                                                        .spaceBetween,
+                                                                        .spaceEvenly,
                                                                 children: [
                                                                   Align(
                                                                     alignment:

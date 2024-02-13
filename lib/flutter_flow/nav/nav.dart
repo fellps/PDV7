@@ -74,14 +74,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? entryPage ?? const ProductListWidget()
+          ? entryPage ?? const EventsWidget()
           : const LoginWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? entryPage ?? const ProductListWidget()
+              ? entryPage ?? const EventsWidget()
               : const LoginWidget(),
         ),
         FFRoute(
@@ -92,21 +92,25 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
         FFRoute(
           name: 'Events',
           path: '/events',
+          requireAuth: true,
           builder: (context, params) => const EventsWidget(),
         ),
         FFRoute(
           name: 'Checkout',
           path: '/checkout',
+          requireAuth: true,
           builder: (context, params) => const CheckoutWidget(),
         ),
         FFRoute(
           name: 'UserRegistration',
           path: '/userRegistration',
+          requireAuth: true,
           builder: (context, params) => const UserRegistrationWidget(),
         ),
         FFRoute(
           name: 'ProductList',
           path: '/productList',
+          requireAuth: true,
           builder: (context, params) => const ProductListWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),

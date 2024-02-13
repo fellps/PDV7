@@ -216,11 +216,6 @@ class QueryAllEventsRecordsCall {
       alwaysAllowBody: false,
     );
   }
-
-  String? name(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$[:].name''',
-      ));
 }
 
 class AddEventsRecordCall {
