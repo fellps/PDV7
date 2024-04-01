@@ -1,10 +1,15 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:async';
+import '/flutter_flow/request_manager.dart';
+
 import 'product_list_widget.dart' show ProductListWidget;
 import 'package:flutter/material.dart';
 
 class ProductListModel extends FlutterFlowModel<ProductListWidget> {
+  ///  Local state fields for this page.
+
+  String txtFieldTicket = ' ';
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -17,9 +22,22 @@ class ProductListModel extends FlutterFlowModel<ProductListWidget> {
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
-  Completer<ApiCallResponse>? apiRequestCompleter;
+  /// Query cache managers for this widget.
 
-  /// Initialization and disposal methods.
+  final _getProductsManager = FutureRequestManager<ApiCallResponse>();
+  Future<ApiCallResponse> getProducts({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<ApiCallResponse> Function() requestFn,
+  }) =>
+      _getProductsManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearGetProductsCache() => _getProductsManager.clear();
+  void clearGetProductsCacheKey(String? uniqueKey) =>
+      _getProductsManager.clearRequest(uniqueKey);
 
   @override
   void initState(BuildContext context) {}
@@ -31,24 +49,9 @@ class ProductListModel extends FlutterFlowModel<ProductListWidget> {
     searchBarController?.dispose();
 
     tabBarController?.dispose();
-  }
 
-  /// Action blocks are added here.
+    /// Dispose query cache managers for this widget.
 
-  /// Additional helper methods are added here.
-
-  Future waitForApiRequestCompleted({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(const Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = apiRequestCompleter?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
+    clearGetProductsCache();
   }
 }

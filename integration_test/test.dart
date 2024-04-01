@@ -8,6 +8,8 @@ import 'package:pdv7/index.dart';
 import 'package:pdv7/main.dart';
 import 'package:pdv7/flutter_flow/flutter_flow_util.dart';
 
+import 'package:provider/provider.dart';
+
 import 'package:pdv7/auth/custom_auth/auth_util.dart';
 
 void main() async {
@@ -19,8 +21,15 @@ void main() async {
 
       await authManager.signOut();
 
-      await tester.pumpWidget(MyApp(
-        entryPage: LoginWidget(),
+      FFAppState.reset();
+      final appState = FFAppState();
+      await appState.initializePersistedState();
+
+      await tester.pumpWidget(ChangeNotifierProvider(
+        create: (context) => appState,
+        child: MyApp(
+          entryPage: LoginWidget(),
+        ),
       ));
 
       await tester.enterText(find.byKey(ValueKey('operator_xxeu')),

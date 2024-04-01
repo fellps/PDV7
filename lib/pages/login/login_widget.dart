@@ -8,7 +8,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'login_model.dart';
@@ -149,15 +148,6 @@ class _LoginWidgetState extends State<LoginWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -223,7 +213,11 @@ class _LoginWidgetState extends State<LoginWidget>
                           const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                       child: Text(
                         'Ponto de Venda',
-                        style: FlutterFlowTheme.of(context).headlineSmall,
+                        style:
+                            FlutterFlowTheme.of(context).headlineSmall.override(
+                                  fontFamily: 'Outfit',
+                                  letterSpacing: 0.0,
+                                ),
                       ).animateOnPageLoad(
                           animationsMap['textOnPageLoadAnimation1']!),
                     ),
@@ -232,7 +226,11 @@ class _LoginWidgetState extends State<LoginWidget>
                           const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                       child: Text(
                         'Informe os dados do seu operador',
-                        style: FlutterFlowTheme.of(context).labelMedium,
+                        style:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                       ).animateOnPageLoad(
                           animationsMap['textOnPageLoadAnimation2']!),
                     ),
@@ -268,8 +266,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'Operador',
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
@@ -305,7 +307,13 @@ class _LoginWidgetState extends State<LoginWidget>
                                       .secondaryBackground,
                                   contentPadding: const EdgeInsets.all(24.0),
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                                minLines: null,
                                 keyboardType: TextInputType.emailAddress,
                                 validator: _model.operatorControllerValidator
                                     .asValidator(context),
@@ -321,12 +329,17 @@ class _LoginWidgetState extends State<LoginWidget>
                                 key: const ValueKey('password_qync'),
                                 controller: _model.passwordController,
                                 focusNode: _model.passwordFocusNode,
+                                autofocus: false,
                                 autofillHints: const [AutofillHints.password],
                                 obscureText: !_model.passwordVisibility,
                                 decoration: InputDecoration(
                                   labelText: 'Senha',
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
@@ -377,7 +390,13 @@ class _LoginWidgetState extends State<LoginWidget>
                                     ),
                                   ),
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                                minLines: null,
                                 validator: _model.passwordControllerValidator
                                     .asValidator(context),
                               ),
@@ -406,8 +425,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'PDV',
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
@@ -443,7 +466,13 @@ class _LoginWidgetState extends State<LoginWidget>
                                       .secondaryBackground,
                                   contentPadding: const EdgeInsets.all(24.0),
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                                minLines: null,
                                 keyboardType: TextInputType.emailAddress,
                                 validator: _model.posControllerValidator
                                     .asValidator(context),
@@ -463,8 +492,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'Terminal',
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
@@ -500,7 +533,13 @@ class _LoginWidgetState extends State<LoginWidget>
                                       .secondaryBackground,
                                   contentPadding: const EdgeInsets.all(24.0),
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                                minLines: null,
                                 keyboardType: TextInputType.emailAddress,
                                 validator: _model.terminalControllerValidator
                                     .asValidator(context),
@@ -595,6 +634,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                       .override(
                                         fontFamily: 'Readex Pro',
                                         color: Colors.white,
+                                        letterSpacing: 0.0,
                                       ),
                                   elevation: 3.0,
                                   borderSide: const BorderSide(

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '/backend/schema/structs/index.dart';
 
 import '/auth/custom_auth/custom_auth_user_provider.dart';
 
@@ -111,7 +112,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           name: 'ProductList',
           path: '/productList',
           requireAuth: true,
-          builder: (context, params) => const ProductListWidget(),
+          builder: (context, params) => ProductListWidget(
+            eventId: params.getParam(
+              'eventId',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'PrintFeedback',
+          path: '/printFeedback',
+          requireAuth: true,
+          builder: (context, params) => const PrintFeedbackWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -230,6 +242,7 @@ class FFParameters {
     String paramName,
     ParamType type, [
     bool isList = false,
+    StructBuilder<T>? structBuilder,
   ]) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -247,6 +260,7 @@ class FFParameters {
       param,
       type,
       isList,
+      structBuilder: structBuilder,
     );
   }
 }
@@ -285,6 +299,7 @@ class FFRoute {
           return null;
         },
         pageBuilder: (context, state) {
+          fixStatusBarOniOS16AndBelow(context);
           final ffParams = FFParameters(state, asyncParams);
           final page = ffParams.hasFutures
               ? FutureBuilder(

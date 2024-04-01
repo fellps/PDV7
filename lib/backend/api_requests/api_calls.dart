@@ -202,13 +202,17 @@ class EditEventsRecordCall {
 }
 
 class QueryAllEventsRecordsCall {
-  Future<ApiCallResponse> call() async {
+  Future<ApiCallResponse> call({
+    String? name = '',
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'Query all events records',
       apiUrl: '${BilheteriaDigitalGroup.baseUrl}/events',
       callType: ApiCallType.GET,
       headers: {},
-      params: {},
+      params: {
+        'name': name,
+      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -297,13 +301,19 @@ class EditTicketsRecordCall {
 }
 
 class QueryAllTicketsRecordsCall {
-  Future<ApiCallResponse> call() async {
+  Future<ApiCallResponse> call({
+    String? name = '',
+    int? eventId,
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'Query all tickets records',
       apiUrl: '${BilheteriaDigitalGroup.baseUrl}/tickets',
       callType: ApiCallType.GET,
       headers: {},
-      params: {},
+      params: {
+        'name': name,
+        'eventId': eventId,
+      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

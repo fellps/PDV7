@@ -59,8 +59,6 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
   // Stores action output result for [Backend Call - API (Login and retrieve an authentication token)] action in Button widget.
   ApiCallResponse? apiResult;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     operatorControllerValidator = _operatorControllerValidator;
@@ -83,8 +81,4 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
     terminalFocusNode?.dispose();
     terminalController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

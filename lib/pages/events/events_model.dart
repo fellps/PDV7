@@ -1,20 +1,39 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:async';
+import '/flutter_flow/request_manager.dart';
+
 import 'events_widget.dart' show EventsWidget;
 import 'package:flutter/material.dart';
 
 class EventsModel extends FlutterFlowModel<EventsWidget> {
+  ///  Local state fields for this page.
+
+  String txtFieldEvent = ' ';
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for searchBar widget.
-  FocusNode? searchBarFocusNode;
-  TextEditingController? searchBarController;
-  String? Function(BuildContext, String?)? searchBarControllerValidator;
-  Completer<ApiCallResponse>? apiRequestCompleter;
+  // State field(s) for searchBarEvent widget.
+  FocusNode? searchBarEventFocusNode;
+  TextEditingController? searchBarEventController;
+  String? Function(BuildContext, String?)? searchBarEventControllerValidator;
 
-  /// Initialization and disposal methods.
+  /// Query cache managers for this widget.
+
+  final _getEventsManager = FutureRequestManager<ApiCallResponse>();
+  Future<ApiCallResponse> getEvents({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<ApiCallResponse> Function() requestFn,
+  }) =>
+      _getEventsManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearGetEventsCache() => _getEventsManager.clear();
+  void clearGetEventsCacheKey(String? uniqueKey) =>
+      _getEventsManager.clearRequest(uniqueKey);
 
   @override
   void initState(BuildContext context) {}
@@ -22,26 +41,11 @@ class EventsModel extends FlutterFlowModel<EventsWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
-    searchBarFocusNode?.dispose();
-    searchBarController?.dispose();
-  }
+    searchBarEventFocusNode?.dispose();
+    searchBarEventController?.dispose();
 
-  /// Action blocks are added here.
+    /// Dispose query cache managers for this widget.
 
-  /// Additional helper methods are added here.
-
-  Future waitForApiRequestCompleted({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(const Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = apiRequestCompleter?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
+    clearGetEventsCache();
   }
 }

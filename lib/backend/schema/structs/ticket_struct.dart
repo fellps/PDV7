@@ -13,12 +13,14 @@ class TicketStruct extends BaseStruct {
     int? batch,
     String? type,
     String? gender,
+    int? totalItems,
   })  : _id = id,
         _name = name,
         _amount = amount,
         _batch = batch,
         _type = type,
-        _gender = gender;
+        _gender = gender,
+        _totalItems = totalItems;
 
   // "id" field.
   int? _id;
@@ -29,7 +31,7 @@ class TicketStruct extends BaseStruct {
 
   // "name" field.
   String? _name;
-  String get name => _name ?? '';
+  String get name => _name ?? '-';
   set name(String? val) => _name = val;
   bool hasName() => _name != null;
 
@@ -49,15 +51,22 @@ class TicketStruct extends BaseStruct {
 
   // "type" field.
   String? _type;
-  String get type => _type ?? '';
+  String get type => _type ?? '-';
   set type(String? val) => _type = val;
   bool hasType() => _type != null;
 
   // "gender" field.
   String? _gender;
-  String get gender => _gender ?? '';
+  String get gender => _gender ?? '-';
   set gender(String? val) => _gender = val;
   bool hasGender() => _gender != null;
+
+  // "totalItems" field.
+  int? _totalItems;
+  int get totalItems => _totalItems ?? 0;
+  set totalItems(int? val) => _totalItems = val;
+  void incrementTotalItems(int amount) => _totalItems = totalItems + amount;
+  bool hasTotalItems() => _totalItems != null;
 
   static TicketStruct fromMap(Map<String, dynamic> data) => TicketStruct(
         id: castToType<int>(data['id']),
@@ -66,6 +75,7 @@ class TicketStruct extends BaseStruct {
         batch: castToType<int>(data['batch']),
         type: data['type'] as String?,
         gender: data['gender'] as String?,
+        totalItems: castToType<int>(data['totalItems']),
       );
 
   static TicketStruct? maybeFromMap(dynamic data) =>
@@ -78,6 +88,7 @@ class TicketStruct extends BaseStruct {
         'batch': _batch,
         'type': _type,
         'gender': _gender,
+        'totalItems': _totalItems,
       }.withoutNulls;
 
   @override
@@ -105,6 +116,10 @@ class TicketStruct extends BaseStruct {
         'gender': serializeParam(
           _gender,
           ParamType.String,
+        ),
+        'totalItems': serializeParam(
+          _totalItems,
+          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -140,6 +155,11 @@ class TicketStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        totalItems: deserializeParam(
+          data['totalItems'],
+          ParamType.int,
+          false,
+        ),
       );
 
   @override
@@ -153,12 +173,13 @@ class TicketStruct extends BaseStruct {
         amount == other.amount &&
         batch == other.batch &&
         type == other.type &&
-        gender == other.gender;
+        gender == other.gender &&
+        totalItems == other.totalItems;
   }
 
   @override
-  int get hashCode =>
-      const ListEquality().hash([id, name, amount, batch, type, gender]);
+  int get hashCode => const ListEquality()
+      .hash([id, name, amount, batch, type, gender, totalItems]);
 }
 
 TicketStruct createTicketStruct({
@@ -168,6 +189,7 @@ TicketStruct createTicketStruct({
   int? batch,
   String? type,
   String? gender,
+  int? totalItems,
 }) =>
     TicketStruct(
       id: id,
@@ -176,4 +198,5 @@ TicketStruct createTicketStruct({
       batch: batch,
       type: type,
       gender: gender,
+      totalItems: totalItems,
     );

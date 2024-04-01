@@ -18,8 +18,10 @@ class UserRegistrationModel extends FlutterFlowModel<UserRegistrationWidget> {
   FocusNode? textFieldFocusNode3;
   TextEditingController? textController3;
   String? Function(BuildContext, String?)? textController3Validator;
-
-  /// Initialization and disposal methods.
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode4;
+  TextEditingController? textController4;
+  String? Function(BuildContext, String?)? textController4Validator;
 
   @override
   void initState(BuildContext context) {}
@@ -35,9 +37,8 @@ class UserRegistrationModel extends FlutterFlowModel<UserRegistrationWidget> {
 
     textFieldFocusNode3?.dispose();
     textController3?.dispose();
+
+    textFieldFocusNode4?.dispose();
+    textController4?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }
