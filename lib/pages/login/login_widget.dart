@@ -8,7 +8,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'login_model.dart';
@@ -27,115 +26,117 @@ class _LoginWidgetState extends State<LoginWidget>
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final animationsMap = {
-    'containerOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        VisibilityEffect(duration: 1.ms),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        ScaleEffect(
-          curve: Curves.bounceOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: const Offset(0.6, 0.6),
-          end: const Offset(1.0, 1.0),
-        ),
-      ],
-    ),
-    'textOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        VisibilityEffect(duration: 100.ms),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 100.ms,
-          duration: 400.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 100.ms,
-          duration: 400.ms,
-          begin: const Offset(0.0, 30.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'textOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        VisibilityEffect(duration: 150.ms),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 150.ms,
-          duration: 400.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 150.ms,
-          duration: 400.ms,
-          begin: const Offset(0.0, 30.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'columnOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 200.ms,
-          duration: 400.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 200.ms,
-          duration: 400.ms,
-          begin: const Offset(0.0, 60.0),
-          end: const Offset(0.0, 0.0),
-        ),
-        TiltEffect(
-          curve: Curves.easeInOut,
-          delay: 200.ms,
-          duration: 400.ms,
-          begin: const Offset(-0.349, 0),
-          end: const Offset(0, 0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => LoginModel());
 
-    _model.operatorController ??= TextEditingController();
+    _model.operatorTextController ??= TextEditingController();
     _model.operatorFocusNode ??= FocusNode();
 
-    _model.passwordController ??= TextEditingController();
+    _model.passwordTextController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
 
-    _model.posController ??= TextEditingController();
+    _model.posTextController ??= TextEditingController();
     _model.posFocusNode ??= FocusNode();
 
-    _model.terminalController ??= TextEditingController(
+    _model.terminalTextController ??= TextEditingController(
         text: valueOrDefault<String>(
       _model.serial,
       'Desconhecido',
     ));
     _model.terminalFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          ScaleEffect(
+            curve: Curves.bounceOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.6, 0.6),
+            end: const Offset(1.0, 1.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation1': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 100.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 100.0.ms,
+            duration: 400.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 100.0.ms,
+            duration: 400.0.ms,
+            begin: const Offset(0.0, 30.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation2': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 150.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 150.0.ms,
+            duration: 400.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 150.0.ms,
+            duration: 400.0.ms,
+            begin: const Offset(0.0, 30.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'columnOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 200.0.ms,
+            duration: 400.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 200.0.ms,
+            duration: 400.0.ms,
+            begin: const Offset(0.0, 60.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          TiltEffect(
+            curve: Curves.easeInOut,
+            delay: 200.0.ms,
+            duration: 400.0.ms,
+            begin: const Offset(-0.349, 0),
+            end: const Offset(0, 0),
+          ),
+        ],
+      ),
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -149,15 +150,6 @@ class _LoginWidgetState extends State<LoginWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -174,11 +166,10 @@ class _LoginWidgetState extends State<LoginWidget>
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    FlutterFlowTheme.of(context).primary,
                     FlutterFlowTheme.of(context).error,
-                    FlutterFlowTheme.of(context).tertiary
+                    FlutterFlowTheme.of(context).error
                   ],
-                  stops: const [0.0, 0.5, 1.0],
+                  stops: const [0.5, 1.0],
                   begin: const AlignmentDirectional(-1.0, -1.0),
                   end: const AlignmentDirectional(1.0, 1.0),
                 ),
@@ -205,7 +196,7 @@ class _LoginWidgetState extends State<LoginWidget>
                       width: MediaQuery.sizeOf(context).width * 0.8,
                       height: 100.0,
                       decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).accent4,
+                        color: const Color(0xC1000000),
                         borderRadius: BorderRadius.circular(16.0),
                       ),
                       child: ClipRRect(
@@ -224,7 +215,11 @@ class _LoginWidgetState extends State<LoginWidget>
                           const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                       child: Text(
                         'Ponto de Venda',
-                        style: FlutterFlowTheme.of(context).headlineSmall,
+                        style:
+                            FlutterFlowTheme.of(context).headlineSmall.override(
+                                  fontFamily: 'Outfit',
+                                  letterSpacing: 0.0,
+                                ),
                       ).animateOnPageLoad(
                           animationsMap['textOnPageLoadAnimation1']!),
                     ),
@@ -233,7 +228,11 @@ class _LoginWidgetState extends State<LoginWidget>
                           const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                       child: Text(
                         'Informe os dados do seu operador',
-                        style: FlutterFlowTheme.of(context).labelMedium,
+                        style:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                       ).animateOnPageLoad(
                           animationsMap['textOnPageLoadAnimation2']!),
                     ),
@@ -262,15 +261,19 @@ class _LoginWidgetState extends State<LoginWidget>
                               width: double.infinity,
                               child: TextFormField(
                                 key: const ValueKey('operator_xxeu'),
-                                controller: _model.operatorController,
+                                controller: _model.operatorTextController,
                                 focusNode: _model.operatorFocusNode,
                                 autofocus: true,
                                 autofillHints: const [AutofillHints.email],
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'Operador',
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
@@ -306,9 +309,15 @@ class _LoginWidgetState extends State<LoginWidget>
                                       .secondaryBackground,
                                   contentPadding: const EdgeInsets.all(24.0),
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
                                 keyboardType: TextInputType.emailAddress,
-                                validator: _model.operatorControllerValidator
+                                validator: _model
+                                    .operatorTextControllerValidator
                                     .asValidator(context),
                               ),
                             ),
@@ -320,14 +329,19 @@ class _LoginWidgetState extends State<LoginWidget>
                               width: double.infinity,
                               child: TextFormField(
                                 key: const ValueKey('password_qync'),
-                                controller: _model.passwordController,
+                                controller: _model.passwordTextController,
                                 focusNode: _model.passwordFocusNode,
+                                autofocus: false,
                                 autofillHints: const [AutofillHints.password],
                                 obscureText: !_model.passwordVisibility,
                                 decoration: InputDecoration(
                                   labelText: 'Senha',
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
@@ -378,8 +392,14 @@ class _LoginWidgetState extends State<LoginWidget>
                                     ),
                                   ),
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
-                                validator: _model.passwordControllerValidator
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                                validator: _model
+                                    .passwordTextControllerValidator
                                     .asValidator(context),
                               ),
                             ),
@@ -390,7 +410,7 @@ class _LoginWidgetState extends State<LoginWidget>
                             child: SizedBox(
                               width: double.infinity,
                               child: TextFormField(
-                                controller: _model.posController,
+                                controller: _model.posTextController,
                                 focusNode: _model.posFocusNode,
                                 onFieldSubmitted: (_) async {
                                   unawaited(
@@ -407,8 +427,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'PDV',
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
@@ -444,9 +468,14 @@ class _LoginWidgetState extends State<LoginWidget>
                                       .secondaryBackground,
                                   contentPadding: const EdgeInsets.all(24.0),
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
                                 keyboardType: TextInputType.emailAddress,
-                                validator: _model.posControllerValidator
+                                validator: _model.posTextControllerValidator
                                     .asValidator(context),
                               ),
                             ),
@@ -457,15 +486,19 @@ class _LoginWidgetState extends State<LoginWidget>
                             child: SizedBox(
                               width: double.infinity,
                               child: TextFormField(
-                                controller: _model.terminalController,
+                                controller: _model.terminalTextController,
                                 focusNode: _model.terminalFocusNode,
                                 autofocus: true,
                                 autofillHints: const [AutofillHints.email],
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'Terminal',
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
@@ -501,9 +534,15 @@ class _LoginWidgetState extends State<LoginWidget>
                                       .secondaryBackground,
                                   contentPadding: const EdgeInsets.all(24.0),
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
                                 keyboardType: TextInputType.emailAddress,
-                                validator: _model.terminalControllerValidator
+                                validator: _model
+                                    .terminalTextControllerValidator
                                     .asValidator(context),
                               ),
                             ),
@@ -525,9 +564,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                   _model.apiResult = await BilheteriaDigitalGroup
                                       .loginAndRetrieveAnAuthenticationTokenCall
                                       .call(
-                                    email: _model.operatorController.text,
-                                    password: _model.passwordController.text,
-                                    terminal: _model.terminalController.text,
+                                    email: _model.operatorTextController.text,
+                                    password:
+                                        _model.passwordTextController.text,
+                                    terminal:
+                                        _model.terminalTextController.text,
                                   );
                                   if ((_model.apiResult?.succeeded ?? true)) {
                                     GoRouter.of(context).prepareAuthEvent();
@@ -551,12 +592,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                       ),
                                     );
                                     navigate = () => context.goNamedAuth(
-                                        'TicketList', context.mounted);
+                                        'Events', context.mounted);
                                     setState(() {
-                                      _model.operatorController?.clear();
-                                      _model.passwordController?.clear();
-                                      _model.posController?.clear();
-                                      _model.terminalController?.clear();
+                                      _model.operatorTextController?.clear();
+                                      _model.passwordTextController?.clear();
+                                      _model.posTextController?.clear();
+                                      _model.terminalTextController?.clear();
                                     });
                                   } else {
                                     ScaffoldMessenger.of(context)
@@ -596,6 +637,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                       .override(
                                         fontFamily: 'Readex Pro',
                                         color: Colors.white,
+                                        letterSpacing: 0.0,
                                       ),
                                   elevation: 3.0,
                                   borderSide: const BorderSide(

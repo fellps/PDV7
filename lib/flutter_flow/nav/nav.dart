@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '/backend/schema/structs/index.dart';
 
 import '/auth/custom_auth/custom_auth_user_provider.dart';
 
@@ -74,14 +75,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? entryPage ?? const TicketListWidget()
+          ? entryPage ?? const EventsWidget()
           : const LoginWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? entryPage ?? const TicketListWidget()
+              ? entryPage ?? const EventsWidget()
               : const LoginWidget(),
         ),
         FFRoute(
@@ -90,24 +91,45 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           builder: (context, params) => const LoginWidget(),
         ),
         FFRoute(
-          name: 'TicketList',
-          path: '/ticketList',
-          builder: (context, params) => const TicketListWidget(),
-        ),
-        FFRoute(
           name: 'Events',
           path: '/events',
+          requireAuth: true,
           builder: (context, params) => const EventsWidget(),
         ),
         FFRoute(
           name: 'Checkout',
           path: '/checkout',
+          requireAuth: true,
           builder: (context, params) => const CheckoutWidget(),
         ),
         FFRoute(
           name: 'UserRegistration',
           path: '/userRegistration',
+          requireAuth: true,
           builder: (context, params) => const UserRegistrationWidget(),
+        ),
+        FFRoute(
+          name: 'ProductList',
+          path: '/productList',
+          requireAuth: true,
+          builder: (context, params) => ProductListWidget(
+            eventId: params.getParam(
+              'eventId',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'PrintFeedback',
+          path: '/printFeedback',
+          requireAuth: true,
+          builder: (context, params) => const PrintFeedbackWidget(),
+        ),
+        FFRoute(
+          name: 'Payment',
+          path: '/payment',
+          requireAuth: true,
+          builder: (context, params) => const PaymentWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -184,7 +206,7 @@ extension _GoRouterStateExtensions on GoRouterState {
       extra != null ? extra as Map<String, dynamic> : {};
   Map<String, dynamic> get allParams => <String, dynamic>{}
     ..addAll(pathParameters)
-    ..addAll(queryParameters)
+    ..addAll(uri.queryParameters)
     ..addAll(extraMap);
   TransitionInfo get transitionInfo => extraMap.containsKey(kTransitionInfoKey)
       ? extraMap[kTransitionInfoKey] as TransitionInfo
@@ -226,6 +248,7 @@ class FFParameters {
     String paramName,
     ParamType type, [
     bool isList = false,
+    StructBuilder<T>? structBuilder,
   ]) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -243,6 +266,7 @@ class FFParameters {
       param,
       type,
       isList,
+      structBuilder: structBuilder,
     );
   }
 }
@@ -275,12 +299,13 @@ class FFRoute {
           }
 
           if (requireAuth && !appStateNotifier.loggedIn) {
-            appStateNotifier.setRedirectLocationIfUnset(state.location);
+            appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
             return '/login';
           }
           return null;
         },
         pageBuilder: (context, state) {
+          fixStatusBarOniOS16AndBelow(context);
           final ffParams = FFParameters(state, asyncParams);
           final page = ffParams.hasFutures
               ? FutureBuilder(
@@ -353,7 +378,7 @@ class RootPageContext {
   static bool isInactiveRootPage(BuildContext context) {
     final rootPageContext = context.read<RootPageContext?>();
     final isRootPage = rootPageContext?.isRootPage ?? false;
-    final location = GoRouter.of(context).location;
+    final location = GoRouterState.of(context).uri.toString();
     return isRootPage &&
         location != '/' &&
         location != rootPageContext?.errorRoute;

@@ -7,10 +7,19 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class UserStruct extends BaseStruct {
   UserStruct({
+    int? id,
     String? name,
     String? email,
-  })  : _name = name,
+  })  : _id = id,
+        _name = name,
         _email = email;
+
+  // "id" field.
+  int? _id;
+  int get id => _id ?? 0;
+  set id(int? val) => _id = val;
+  void incrementId(int amount) => _id = id + amount;
+  bool hasId() => _id != null;
 
   // "name" field.
   String? _name;
@@ -25,6 +34,7 @@ class UserStruct extends BaseStruct {
   bool hasEmail() => _email != null;
 
   static UserStruct fromMap(Map<String, dynamic> data) => UserStruct(
+        id: castToType<int>(data['id']),
         name: data['name'] as String?,
         email: data['email'] as String?,
       );
@@ -33,12 +43,17 @@ class UserStruct extends BaseStruct {
       data is Map ? UserStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
+        'id': _id,
         'name': _name,
         'email': _email,
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
+        'id': serializeParam(
+          _id,
+          ParamType.int,
+        ),
         'name': serializeParam(
           _name,
           ParamType.String,
@@ -51,6 +66,11 @@ class UserStruct extends BaseStruct {
 
   static UserStruct fromSerializableMap(Map<String, dynamic> data) =>
       UserStruct(
+        id: deserializeParam(
+          data['id'],
+          ParamType.int,
+          false,
+        ),
         name: deserializeParam(
           data['name'],
           ParamType.String,
@@ -68,18 +88,23 @@ class UserStruct extends BaseStruct {
 
   @override
   bool operator ==(Object other) {
-    return other is UserStruct && name == other.name && email == other.email;
+    return other is UserStruct &&
+        id == other.id &&
+        name == other.name &&
+        email == other.email;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([name, email]);
+  int get hashCode => const ListEquality().hash([id, name, email]);
 }
 
 UserStruct createUserStruct({
+  int? id,
   String? name,
   String? email,
 }) =>
     UserStruct(
+      id: id,
       name: name,
       email: email,
     );

@@ -10,9 +10,9 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
   final formKey = GlobalKey<FormState>();
   // State field(s) for operator widget.
   FocusNode? operatorFocusNode;
-  TextEditingController? operatorController;
-  String? Function(BuildContext, String?)? operatorControllerValidator;
-  String? _operatorControllerValidator(BuildContext context, String? val) {
+  TextEditingController? operatorTextController;
+  String? Function(BuildContext, String?)? operatorTextControllerValidator;
+  String? _operatorTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return 'O operador é obrigatório';
     }
@@ -31,10 +31,10 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
 
   // State field(s) for password widget.
   FocusNode? passwordFocusNode;
-  TextEditingController? passwordController;
+  TextEditingController? passwordTextController;
   late bool passwordVisibility;
-  String? Function(BuildContext, String?)? passwordControllerValidator;
-  String? _passwordControllerValidator(BuildContext context, String? val) {
+  String? Function(BuildContext, String?)? passwordTextControllerValidator;
+  String? _passwordTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return 'A senha é obrigatória';
     }
@@ -48,43 +48,37 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
 
   // State field(s) for pos widget.
   FocusNode? posFocusNode;
-  TextEditingController? posController;
-  String? Function(BuildContext, String?)? posControllerValidator;
+  TextEditingController? posTextController;
+  String? Function(BuildContext, String?)? posTextControllerValidator;
   // Stores action output result for [Custom Action - deviceIMEIAction] action in pos widget.
   String? serial;
   // State field(s) for terminal widget.
   FocusNode? terminalFocusNode;
-  TextEditingController? terminalController;
-  String? Function(BuildContext, String?)? terminalControllerValidator;
+  TextEditingController? terminalTextController;
+  String? Function(BuildContext, String?)? terminalTextControllerValidator;
   // Stores action output result for [Backend Call - API (Login and retrieve an authentication token)] action in Button widget.
   ApiCallResponse? apiResult;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
-    operatorControllerValidator = _operatorControllerValidator;
+    operatorTextControllerValidator = _operatorTextControllerValidator;
     passwordVisibility = false;
-    passwordControllerValidator = _passwordControllerValidator;
+    passwordTextControllerValidator = _passwordTextControllerValidator;
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
     operatorFocusNode?.dispose();
-    operatorController?.dispose();
+    operatorTextController?.dispose();
 
     passwordFocusNode?.dispose();
-    passwordController?.dispose();
+    passwordTextController?.dispose();
 
     posFocusNode?.dispose();
-    posController?.dispose();
+    posTextController?.dispose();
 
     terminalFocusNode?.dispose();
-    terminalController?.dispose();
+    terminalTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }
