@@ -26,7 +26,7 @@ class _EventsWidgetState extends State<EventsWidget> {
     super.initState();
     _model = createModel(context, () => EventsModel());
 
-    _model.searchBarEventController ??= TextEditingController();
+    _model.searchBarEventTextController ??= TextEditingController();
     _model.searchBarEventFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -115,12 +115,13 @@ class _EventsWidgetState extends State<EventsWidget> {
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 12.0, 8.0, 0.0),
                                 child: TextFormField(
-                                  controller: _model.searchBarEventController,
+                                  controller:
+                                      _model.searchBarEventTextController,
                                   focusNode: _model.searchBarEventFocusNode,
                                   onFieldSubmitted: (_) async {
                                     setState(() {
-                                      _model.txtFieldEvent =
-                                          _model.searchBarEventController.text;
+                                      _model.txtFieldEvent = _model
+                                          .searchBarEventTextController.text;
                                     });
                                   },
                                   textCapitalization: TextCapitalization.words,
@@ -190,9 +191,8 @@ class _EventsWidgetState extends State<EventsWidget> {
                                         fontFamily: 'Readex Pro',
                                         letterSpacing: 0.0,
                                       ),
-                                  minLines: null,
                                   validator: _model
-                                      .searchBarEventControllerValidator
+                                      .searchBarEventTextControllerValidator
                                       .asValidator(context),
                                 ),
                               ),
@@ -213,8 +213,8 @@ class _EventsWidgetState extends State<EventsWidget> {
                                 ),
                                 onPressed: () async {
                                   setState(() {
-                                    _model.txtFieldEvent =
-                                        _model.searchBarEventController.text;
+                                    _model.txtFieldEvent = _model
+                                        .searchBarEventTextController.text;
                                   });
                                 },
                               ),

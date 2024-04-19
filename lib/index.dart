@@ -7,3 +7,4 @@ export '/pages/user_registration/user_registration_widget.dart'
 export '/pages/product_list/product_list_widget.dart' show ProductListWidget;
 export '/pages/print_feedback/print_feedback_widget.dart'
     show PrintFeedbackWidget;
+export '/pages/payment/payment_widget.dart' show PaymentWidget;

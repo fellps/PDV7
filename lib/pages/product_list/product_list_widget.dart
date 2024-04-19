@@ -33,7 +33,7 @@ class _ProductListWidgetState extends State<ProductListWidget>
     super.initState();
     _model = createModel(context, () => ProductListModel());
 
-    _model.searchBarController ??= TextEditingController();
+    _model.searchBarTextController ??= TextEditingController();
     _model.searchBarFocusNode ??= FocusNode();
 
     _model.tabBarController = TabController(
@@ -101,12 +101,12 @@ class _ProductListWidgetState extends State<ProductListWidget>
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 8.0, 0.0),
                     child: TextFormField(
-                      controller: _model.searchBarController,
+                      controller: _model.searchBarTextController,
                       focusNode: _model.searchBarFocusNode,
                       onFieldSubmitted: (_) async {
                         setState(() {
                           _model.txtFieldTicket =
-                              _model.searchBarController.text;
+                              _model.searchBarTextController.text;
                         });
                       },
                       textCapitalization: TextCapitalization.words,
@@ -166,8 +166,7 @@ class _ProductListWidgetState extends State<ProductListWidget>
                             fontFamily: 'Readex Pro',
                             letterSpacing: 0.0,
                           ),
-                      minLines: null,
-                      validator: _model.searchBarControllerValidator
+                      validator: _model.searchBarTextControllerValidator
                           .asValidator(context),
                     ),
                   ),
@@ -186,7 +185,8 @@ class _ProductListWidgetState extends State<ProductListWidget>
                     ),
                     onPressed: () async {
                       setState(() {
-                        _model.txtFieldTicket = _model.searchBarController.text;
+                        _model.txtFieldTicket =
+                            _model.searchBarTextController.text;
                       });
                     },
                   ),

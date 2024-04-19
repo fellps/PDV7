@@ -15,8 +15,8 @@ class ProductListModel extends FlutterFlowModel<ProductListWidget> {
   final unfocusNode = FocusNode();
   // State field(s) for searchBar widget.
   FocusNode? searchBarFocusNode;
-  TextEditingController? searchBarController;
-  String? Function(BuildContext, String?)? searchBarControllerValidator;
+  TextEditingController? searchBarTextController;
+  String? Function(BuildContext, String?)? searchBarTextControllerValidator;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
@@ -46,7 +46,7 @@ class ProductListModel extends FlutterFlowModel<ProductListWidget> {
   void dispose() {
     unfocusNode.dispose();
     searchBarFocusNode?.dispose();
-    searchBarController?.dispose();
+    searchBarTextController?.dispose();
 
     tabBarController?.dispose();
 

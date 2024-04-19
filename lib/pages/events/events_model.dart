@@ -15,8 +15,9 @@ class EventsModel extends FlutterFlowModel<EventsWidget> {
   final unfocusNode = FocusNode();
   // State field(s) for searchBarEvent widget.
   FocusNode? searchBarEventFocusNode;
-  TextEditingController? searchBarEventController;
-  String? Function(BuildContext, String?)? searchBarEventControllerValidator;
+  TextEditingController? searchBarEventTextController;
+  String? Function(BuildContext, String?)?
+      searchBarEventTextControllerValidator;
 
   /// Query cache managers for this widget.
 
@@ -42,7 +43,7 @@ class EventsModel extends FlutterFlowModel<EventsWidget> {
   void dispose() {
     unfocusNode.dispose();
     searchBarEventFocusNode?.dispose();
-    searchBarEventController?.dispose();
+    searchBarEventTextController?.dispose();
 
     /// Dispose query cache managers for this widget.
 

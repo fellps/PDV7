@@ -26,115 +26,117 @@ class _LoginWidgetState extends State<LoginWidget>
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final animationsMap = {
-    'containerOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        VisibilityEffect(duration: 1.ms),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        ScaleEffect(
-          curve: Curves.bounceOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: const Offset(0.6, 0.6),
-          end: const Offset(1.0, 1.0),
-        ),
-      ],
-    ),
-    'textOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        VisibilityEffect(duration: 100.ms),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 100.ms,
-          duration: 400.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 100.ms,
-          duration: 400.ms,
-          begin: const Offset(0.0, 30.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'textOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        VisibilityEffect(duration: 150.ms),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 150.ms,
-          duration: 400.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 150.ms,
-          duration: 400.ms,
-          begin: const Offset(0.0, 30.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'columnOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 200.ms,
-          duration: 400.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 200.ms,
-          duration: 400.ms,
-          begin: const Offset(0.0, 60.0),
-          end: const Offset(0.0, 0.0),
-        ),
-        TiltEffect(
-          curve: Curves.easeInOut,
-          delay: 200.ms,
-          duration: 400.ms,
-          begin: const Offset(-0.349, 0),
-          end: const Offset(0, 0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => LoginModel());
 
-    _model.operatorController ??= TextEditingController();
+    _model.operatorTextController ??= TextEditingController();
     _model.operatorFocusNode ??= FocusNode();
 
-    _model.passwordController ??= TextEditingController();
+    _model.passwordTextController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
 
-    _model.posController ??= TextEditingController();
+    _model.posTextController ??= TextEditingController();
     _model.posFocusNode ??= FocusNode();
 
-    _model.terminalController ??= TextEditingController(
+    _model.terminalTextController ??= TextEditingController(
         text: valueOrDefault<String>(
       _model.serial,
       'Desconhecido',
     ));
     _model.terminalFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          ScaleEffect(
+            curve: Curves.bounceOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.6, 0.6),
+            end: const Offset(1.0, 1.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation1': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 100.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 100.0.ms,
+            duration: 400.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 100.0.ms,
+            duration: 400.0.ms,
+            begin: const Offset(0.0, 30.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation2': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 150.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 150.0.ms,
+            duration: 400.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 150.0.ms,
+            duration: 400.0.ms,
+            begin: const Offset(0.0, 30.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'columnOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 200.0.ms,
+            duration: 400.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 200.0.ms,
+            duration: 400.0.ms,
+            begin: const Offset(0.0, 60.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          TiltEffect(
+            curve: Curves.easeInOut,
+            delay: 200.0.ms,
+            duration: 400.0.ms,
+            begin: const Offset(-0.349, 0),
+            end: const Offset(0, 0),
+          ),
+        ],
+      ),
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -259,7 +261,7 @@ class _LoginWidgetState extends State<LoginWidget>
                               width: double.infinity,
                               child: TextFormField(
                                 key: const ValueKey('operator_xxeu'),
-                                controller: _model.operatorController,
+                                controller: _model.operatorTextController,
                                 focusNode: _model.operatorFocusNode,
                                 autofocus: true,
                                 autofillHints: const [AutofillHints.email],
@@ -313,9 +315,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                       fontFamily: 'Readex Pro',
                                       letterSpacing: 0.0,
                                     ),
-                                minLines: null,
                                 keyboardType: TextInputType.emailAddress,
-                                validator: _model.operatorControllerValidator
+                                validator: _model
+                                    .operatorTextControllerValidator
                                     .asValidator(context),
                               ),
                             ),
@@ -327,7 +329,7 @@ class _LoginWidgetState extends State<LoginWidget>
                               width: double.infinity,
                               child: TextFormField(
                                 key: const ValueKey('password_qync'),
-                                controller: _model.passwordController,
+                                controller: _model.passwordTextController,
                                 focusNode: _model.passwordFocusNode,
                                 autofocus: false,
                                 autofillHints: const [AutofillHints.password],
@@ -396,8 +398,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                       fontFamily: 'Readex Pro',
                                       letterSpacing: 0.0,
                                     ),
-                                minLines: null,
-                                validator: _model.passwordControllerValidator
+                                validator: _model
+                                    .passwordTextControllerValidator
                                     .asValidator(context),
                               ),
                             ),
@@ -408,7 +410,7 @@ class _LoginWidgetState extends State<LoginWidget>
                             child: SizedBox(
                               width: double.infinity,
                               child: TextFormField(
-                                controller: _model.posController,
+                                controller: _model.posTextController,
                                 focusNode: _model.posFocusNode,
                                 onFieldSubmitted: (_) async {
                                   unawaited(
@@ -472,9 +474,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                       fontFamily: 'Readex Pro',
                                       letterSpacing: 0.0,
                                     ),
-                                minLines: null,
                                 keyboardType: TextInputType.emailAddress,
-                                validator: _model.posControllerValidator
+                                validator: _model.posTextControllerValidator
                                     .asValidator(context),
                               ),
                             ),
@@ -485,7 +486,7 @@ class _LoginWidgetState extends State<LoginWidget>
                             child: SizedBox(
                               width: double.infinity,
                               child: TextFormField(
-                                controller: _model.terminalController,
+                                controller: _model.terminalTextController,
                                 focusNode: _model.terminalFocusNode,
                                 autofocus: true,
                                 autofillHints: const [AutofillHints.email],
@@ -539,9 +540,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                       fontFamily: 'Readex Pro',
                                       letterSpacing: 0.0,
                                     ),
-                                minLines: null,
                                 keyboardType: TextInputType.emailAddress,
-                                validator: _model.terminalControllerValidator
+                                validator: _model
+                                    .terminalTextControllerValidator
                                     .asValidator(context),
                               ),
                             ),
@@ -563,9 +564,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                   _model.apiResult = await BilheteriaDigitalGroup
                                       .loginAndRetrieveAnAuthenticationTokenCall
                                       .call(
-                                    email: _model.operatorController.text,
-                                    password: _model.passwordController.text,
-                                    terminal: _model.terminalController.text,
+                                    email: _model.operatorTextController.text,
+                                    password:
+                                        _model.passwordTextController.text,
+                                    terminal:
+                                        _model.terminalTextController.text,
                                   );
                                   if ((_model.apiResult?.succeeded ?? true)) {
                                     GoRouter.of(context).prepareAuthEvent();
@@ -591,10 +594,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                     navigate = () => context.goNamedAuth(
                                         'Events', context.mounted);
                                     setState(() {
-                                      _model.operatorController?.clear();
-                                      _model.passwordController?.clear();
-                                      _model.posController?.clear();
-                                      _model.terminalController?.clear();
+                                      _model.operatorTextController?.clear();
+                                      _model.passwordTextController?.clear();
+                                      _model.posTextController?.clear();
+                                      _model.terminalTextController?.clear();
                                     });
                                   } else {
                                     ScaffoldMessenger.of(context)

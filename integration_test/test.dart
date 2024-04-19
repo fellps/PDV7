@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:pdv7/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:pdv7/flutter_flow/flutter_flow_widgets.dart';
+import 'package:pdv7/flutter_flow/flutter_flow_theme.dart';
 import 'package:pdv7/index.dart';
 import 'package:pdv7/main.dart';
 import 'package:pdv7/flutter_flow/flutter_flow_util.dart';
@@ -15,18 +16,24 @@ import 'package:pdv7/auth/custom_auth/auth_util.dart';
 void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  group('Login', () async {
+  setUpAll(() async {
+    _overrideOnError();
+
+    await FlutterFlowTheme.initialize();
+    await authManager.initialize();
+  });
+
+  setUp(() async {
+    await authManager.signOut();
+    FFAppState.reset();
+    final appState = FFAppState();
+    await appState.initializePersistedState();
+  });
+
+  group('Login', () {
     testWidgets('Should log in', (WidgetTester tester) async {
-      _overrideOnError();
-
-      await authManager.signOut();
-
-      FFAppState.reset();
-      final appState = FFAppState();
-      await appState.initializePersistedState();
-
       await tester.pumpWidget(ChangeNotifierProvider(
-        create: (context) => appState,
+        create: (context) => FFAppState(),
         child: MyApp(
           entryPage: LoginWidget(),
         ),
