@@ -59,9 +59,10 @@ dependencies:
   url_launcher_android: 6.3.0
   url_launcher_ios: 6.2.5
   url_launcher_platform_interface: 2.3.2
-  usb_device: ^1.0.2
-  usb_device_platform_interface: ^1.0.0
-  usb_device_web: ^1.0.0
+  
+  pagseguro_smart_flutter: 1.1.4
+  bot_toast: ^4.0.4
+  flutter_masked_text2: ^0.9.1
 
 
   # The following adds the Cupertino Icons font to your application.

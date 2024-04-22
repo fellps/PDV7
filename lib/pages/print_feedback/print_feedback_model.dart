@@ -6,8 +6,6 @@ class PrintFeedbackModel extends FlutterFlowModel<PrintFeedbackWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Custom Action - printAction] action in Button widget.
-  String? printResult;
 
   @override
   void initState(BuildContext context) {}
