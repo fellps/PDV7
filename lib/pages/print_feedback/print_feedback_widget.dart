@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'print_feedback_model.dart';
@@ -151,10 +150,8 @@ class _PrintFeedbackWidgetState extends State<PrintFeedbackWidget> {
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 32.0),
                     child: FFButtonWidget(
-                      onPressed: () async {
-                        _model.printResult = await actions.printAction();
-
-                        setState(() {});
+                      onPressed: () {
+                        print('Button pressed ...');
                       },
                       text: 'Tentar novamente',
                       options: FFButtonOptions(
