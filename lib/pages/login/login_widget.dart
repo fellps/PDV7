@@ -162,7 +162,7 @@ class _LoginWidgetState extends State<LoginWidget>
           children: [
             Container(
               width: double.infinity,
-              height: 300.0,
+              height: 200.0,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
@@ -211,8 +211,8 @@ class _LoginWidgetState extends State<LoginWidget>
                     ).animateOnPageLoad(
                         animationsMap['containerOnPageLoadAnimation']!),
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 12.0, 0.0, 0.0),
                       child: Text(
                         'Ponto de Venda',
                         style:
@@ -224,8 +224,8 @@ class _LoginWidgetState extends State<LoginWidget>
                           animationsMap['textOnPageLoadAnimation1']!),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 4.0, 0.0, 0.0),
                       child: Text(
                         'Informe os dados do seu operador',
                         style:
@@ -243,7 +243,8 @@ class _LoginWidgetState extends State<LoginWidget>
             Align(
               alignment: const AlignmentDirectional(0.0, 0.0),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(
+                    16.0, 16.0, 16.0, 16.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -612,7 +613,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                 .primaryText,
                                           ),
                                         ),
-                                        duration: const Duration(milliseconds: 4000),
+                                        duration:
+                                            const Duration(milliseconds: 4000),
                                         backgroundColor:
                                             FlutterFlowTheme.of(context).error,
                                       ),
@@ -629,8 +631,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                   height: 52.0,
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
+                                  iconPadding:
+                                      const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
